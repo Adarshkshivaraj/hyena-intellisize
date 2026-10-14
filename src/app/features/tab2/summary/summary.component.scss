@@ -1,0 +1,139 @@
+﻿.summary-top-bar {
+  margin-bottom: 24px;
+}
+
+.btn-back-link {
+  display: inline-block;
+  padding: 0;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ec6602;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.summary-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.summary-metrics-container {
+  margin-bottom: 36px;
+}
+
+.machines-summary-grid {
+  max-height: calc(100vh - 410px);
+  min-height: 180px;
+  padding-right: 8px;
+  overflow-y: auto;
+  display: grid;
+  align-content: start;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.machine-summary-card {
+  padding: 18px 20px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.machine-summary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.machine-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.machine-badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ec6602;
+}
+
+.summary-plugins-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-plugin-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #f3f4f6;
+
+  &:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+}
+
+.summary-plugin-title {
+  margin-bottom: 2px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.summary-plugin-specs {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  padding: 48px 20px;
+  color: #6b7280;
+  text-align: center;
+  background: #ffffff;
+  border: 1px dashed #d1d5db;
+  border-radius: 12px;
+}
+
+.btn-edit-selection {
+  margin-top: 12px;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  background: #ec6602;
+  border: none;
+  border-radius: 6px;
+
+  &:hover {
+    background: #d45a02;
+  }
+}
+
+@media (max-width: 1024px) {
+  .machines-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .machines-summary-grid {
+    height: auto;
+    max-height: calc(100vh - 300px);
+    min-height: 180px;
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,32 @@
+<div class="modal-backdrop" (click)="onBackdropClick($event)">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-header">
+      <h2 id="modal-title" class="modal-title">Add New Resource</h2>
+      <button type="button" class="close-btn" (click)="cancel()" aria-label="Close dialog">×</button>
+    </div>
+
+    <form class="modal-body" (ngSubmit)="submit()">
+      <div class="input-group">
+        <label for="resourceNameInput" class="input-label">Resource Name</label>
+        <input
+          #nameInput
+          id="resourceNameInput"
+          name="resourceName"
+          type="text"
+          class="text-input"
+          [(ngModel)]="resourceName"
+          placeholder="e.g. Name C, Production Cluster, ML Pipeline"
+          autocomplete="off"
+          required
+        />
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!resourceName.trim()">
+          Create Resource
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

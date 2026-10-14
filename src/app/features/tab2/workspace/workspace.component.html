@@ -1,0 +1,73 @@
+<div class="workspace-top-bar">
+  <div class="workspace-heading">
+    <h2 class="workspace-title">Plugin Workspace</h2>
+    <p class="workspace-subtitle">
+      Select the active plugins you want enabled for this component.
+    </p>
+  </div>
+  <button type="button" class="btn-new-resource" (click)="openModal()">+ New Resource</button>
+</div>
+
+<div class="active-resource-chip">
+  <span class="label">Current Resource:</span>
+  <span class="value">{{ resourceService.activeResource()?.name || 'None' }}</span>
+  <span class="selected-summary">
+    ({{ resourceService.totalSelectedPluginsCount() }} plugins selected)
+  </span>
+</div>
+
+<div class="machines-grid">
+  @for (machine of resourceService.machines(); track machine.name) {
+    <div class="machine-card">
+      <div class="machine-card-header">
+        <h3 class="machine-title">{{ machine.name }}</h3>
+        <div class="machine-header-right">
+          <span class="machine-badge">{{ machine.plugins.length }} plugins</span>
+          <label class="select-all" (click)="$event.stopPropagation()">
+            <input
+              type="checkbox"
+              [checked]="resourceService.areAllPluginsSelected(machine.name)"
+              (change)="toggleAllPlugins(machine.name)"
+            />
+            <span class="checkmark"></span>
+            <span class="select-all-label">Select all</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="plugins-list">
+        @for (plugin of machine.plugins; track plugin.name) {
+          <div class="plugin-row" (click)="togglePlugin(machine.name, plugin.name)">
+            <label class="custom-checkbox-wrapper" (click)="$event.stopPropagation()">
+              <input
+                type="checkbox"
+                [checked]="resourceService.isPluginSelected(machine.name, plugin.name)"
+                (change)="togglePlugin(machine.name, plugin.name)"
+              />
+              <span class="checkmark"></span>
+            </label>
+
+            <div class="plugin-content">
+              <div class="plugin-title">{{ plugin.name }}</div>
+              <div class="plugin-specs">
+                RAM: {{ plugin.formattedRam }}, CPU: {{ plugin.formattedCpu }},
+                GPU: {{ plugin.formattedGpu }}, Memory: {{ plugin.ram }} MB
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</div>
+
+<div class="bottom-actions-bar">
+  <button type="button" class="btn-next" (click)="goToSummary()">Next</button>
+</div>
+
+@if (showModal()) {
+  <app-new-resource-modal
+    (dismiss)="closeModal()"
+    (create)="createResource($event)"
+  />
+}

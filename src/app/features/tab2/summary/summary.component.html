@@ -1,0 +1,42 @@
+<div class="summary-top-bar">
+  <button type="button" class="btn-back-link" (click)="backToWorkspace()">
+    ‹ Edit Plugin Selection
+  </button>
+  <h2 class="summary-title">
+    {{ resourceService.activeResource()?.name }} - Resource Sizing
+  </h2>
+</div>
+
+<div class="summary-metrics-container">
+  <app-metric-cards [metrics]="resourceService.activeResourceMetrics()" />
+</div>
+
+<div class="machines-summary-grid">
+  @for (machine of resourceService.selectedMachineSummaries(); track machine.name) {
+    <div class="machine-summary-card">
+      <div class="machine-summary-header">
+        <h3 class="machine-title">{{ machine.name }}</h3>
+        <span class="machine-badge">{{ machine.selectedPlugins.length }} plugins</span>
+      </div>
+
+      <div class="summary-plugins-list">
+        @for (plugin of machine.selectedPlugins; track plugin.name) {
+          <div class="summary-plugin-item">
+            <div class="summary-plugin-title">{{ plugin.name }}</div>
+            <div class="summary-plugin-specs">
+              RAM: {{ plugin.formattedRam }}, CPU: {{ plugin.formattedCpu }},
+              GPU: {{ plugin.formattedGpu }}, Memory: {{ plugin.ram }} MB
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  } @empty {
+    <div class="empty-state">
+      <p>No plugins selected for {{ resourceService.activeResource()?.name }}.</p>
+      <button type="button" class="btn-edit-selection" (click)="backToWorkspace()">
+        Go to Plugin Selection
+      </button>
+    </div>
+  }
+</div>

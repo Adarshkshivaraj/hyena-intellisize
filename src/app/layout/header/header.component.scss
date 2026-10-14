@@ -1,0 +1,181 @@
+﻿$orange: #ec6602;
+$teal: #009999;
+$ink: #1a1a24;
+$muted: #6b7280;
+
+.app-header {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-width: 0;
+}
+
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+
+  .siemens-logo-svg {
+    height: 36px;
+    width: auto;
+    display: block;
+
+    .healthineers {
+      fill: $orange;
+    }
+
+    .siemens {
+      fill: $teal;
+    }
+  }
+}
+
+.brand-title {
+  overflow: hidden;
+  font-size: 20px;
+  font-weight: 600;
+  color: $ink;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  color: $muted;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    color: $orange;
+    background: #f3f4f6;
+  }
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, $teal, #007a7a);
+  border-radius: 50%;
+}
+
+.user-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: $ink;
+  white-space: nowrap;
+}
+
+.tabs-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 16px;
+  background: #ffffff;
+  border-top: 1px solid #f0f0f0;
+  user-select: none;
+}
+
+.nav-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  font-size: 20px;
+  color: $muted;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+
+  &:hover {
+    color: $ink;
+  }
+}
+
+.tab-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 28px;
+  font-size: 15px;
+  font-weight: 500;
+  color: $muted;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: $ink;
+  }
+
+  &.active {
+    font-weight: 600;
+    color: $ink;
+  }
+
+  &.active::after {
+    position: absolute;
+    right: 16px;
+    bottom: 0;
+    left: 16px;
+    height: 3px;
+    content: '';
+    background: $orange;
+    border-radius: 3px 3px 0 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .header-top {
+    flex-wrap: wrap;
+    padding: 10px 14px;
+  }
+
+  .brand-title {
+    display: none;
+  }
+
+  .user-name {
+    display: none;
+  }
+
+  .tab-btn {
+    padding: 0 16px;
+  }
+}

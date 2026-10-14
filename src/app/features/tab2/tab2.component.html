@@ -1,0 +1,43 @@
+<div class="tab2-layout">
+  <aside class="sidebar" [class.collapsed]="!isSidebarOpen()">
+    <div class="sidebar-header" [class.collapsed]="!isSidebarOpen()">
+      <button
+        type="button"
+        class="toggle-btn"
+        (click)="toggleSidebar()"
+        [title]="isSidebarOpen() ? 'Collapse panel' : 'Expand panel'"
+        [attr.aria-label]="isSidebarOpen() ? 'Collapse panel' : 'Expand panel'"
+      >
+        {{ isSidebarOpen() ? '«' : '»' }}
+      </button>
+    </div>
+
+    @if (isSidebarOpen()) {
+      <div class="resources-list">
+        @for (resource of resourceService.resources(); track resource.id) {
+          <div
+            class="resource-tab-item"
+            [class.active]="resource.id === resourceService.activeResourceId()"
+            (click)="selectResource(resource.id)"
+          >
+            <span class="resource-name">{{ resource.name }}</span>
+            @if (resourceService.resources().length > 1) {
+              <button
+                type="button"
+                class="delete-resource-btn"
+                (click)="deleteResource($event, resource.id)"
+                title="Delete resource"
+              >
+                ×
+              </button>
+            }
+          </div>
+        }
+      </div>
+    }
+  </aside>
+
+  <main class="main-content">
+    <router-outlet />
+  </main>
+</div>

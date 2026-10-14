@@ -1,0 +1,51 @@
+<div class="tab1-container">
+  <div class="selectors-row">
+    <div class="form-group">
+      <label for="machineSelect" class="form-label">Viewer Application</label>
+      <div class="select-wrapper">
+        <select
+          id="machineSelect"
+          class="custom-select"
+          [ngModel]="resourceService.tab1SelectedMachine()"
+          (ngModelChange)="onMachineChange($event)"
+        >
+          @for (machine of resourceService.machines(); track machine.name) {
+            <option [value]="machine.name">{{ machine.name }}</option>
+          }
+        </select>
+        <span class="dropdown-icon">▼</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="pluginSelect" class="form-label">Select Plugins</label>
+      <div class="select-wrapper">
+        <select
+          id="pluginSelect"
+          class="custom-select"
+          [ngModel]="resourceService.tab1SelectedPlugin()"
+          (ngModelChange)="onPluginChange($event)"
+        >
+          @for (plugin of currentMachinePlugins(); track plugin.name) {
+            <option [value]="plugin.name">{{ plugin.name }}</option>
+          }
+        </select>
+        <span class="dropdown-icon">▼</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="metrics-wrapper">
+    <app-metric-cards [metrics]="resourceService.tab1Metrics()" />
+  </div>
+
+  @if (selectedPlugin(); as plugin) {
+    <div class="plugin-info-badge">
+      <span class="info-label">Active Specs:</span>
+      <span class="info-tag">CPU: {{ plugin.cpu }} mCore</span>
+      <span class="info-tag">GPU: {{ plugin.gpu }} MB</span>
+      <span class="info-tag">RAM: {{ plugin.ram }} MB</span>
+      <span class="info-tag">Memory Load: {{ plugin.memoryConsumptionPercent }}%</span>
+    </div>
+  }
+</div>
